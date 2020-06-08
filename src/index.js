@@ -3,6 +3,14 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import Parser from './parser';
 import Utility from './utility';
+import './index.css';
+
+import ModuleHeader from './components/module_header';
+import RenderModule from './components/render_module';
+import SyntaxModule from './components/syntax_module';
+import ControlModule from './components/control_module';
+import VariableModule from './components/variable_module';
+import FunctionModule from './components/function_module';
 
 class App extends React.Component {
   constructor(props) {
@@ -99,7 +107,38 @@ class Variable extends React.Component {
   }
 }
 
-ReactDOM.render(<App />,
+class ProtoApp extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		return (
+			<div id='mainframe'>
+				<div>
+					{/* RENDER MODULE */}
+					<RenderModule />
+
+					{/* SYNTAX MODULE */}
+					<SyntaxModule />
+				</div>
+
+				<div>
+					{/* CONTROL MODULE */}
+					<ControlModule />
+
+					{/* VARIABLE MODULE */}
+					<VariableModule />
+
+					{/* FUNCTION MODULE */}
+					<FunctionModule />
+				</div>
+			</div>
+		);
+	}
+}
+
+ReactDOM.render(<ProtoApp />,
   document.getElementById('root')
 );
 
