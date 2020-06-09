@@ -110,9 +110,33 @@ class Variable extends React.Component {
 class ProtoApp extends React.Component {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			varset: new Map()
+		};
+
+		// 기본 정의 상수
+		['E', 'LN2', 'LN10', 'LOG2E', 'LOG10E', 'PI', 'SQRT1_2', 'SQRT2'].forEach(name => {
+			this.state.varset.set(name, {value: Math[name], immutable: true});
+		});
+		
+		// 이벤트 핸들러
+		this.handleVarCreate = this.handleVarCreate.bind(this);
+		this.handleVarChange = this.handleVarChange.bind(this);
+		this.handleVarDelete = this.handleVarDelete.bind(this);
 	}
 
 	render() {
+		// var map to list
+		let varlist = [];
+		for (let pair of this.state.varset.entries()) {
+			varlist.push({
+				varname: pair[0],
+				varvalue: pair[1].value,
+				immutable: pair[1].immutable
+			});
+		}
+
 		return (
 			<div id='mainframe'>
 				<div>
@@ -128,13 +152,49 @@ class ProtoApp extends React.Component {
 					<ControlModule />
 
 					{/* VARIABLE MODULE */}
-					<VariableModule />
+					<VariableModule varlist={varlist}
+													onVarCreate={this.handleVarCreate}
+													onVarChange={this.handleVarChange}
+													onVarDelete={this.handleVarDelete}/>
 
 					{/* FUNCTION MODULE */}
 					<FunctionModule />
 				</div>
 			</div>
 		);
+	}
+
+	/*
+		상수가 생성될 때 핸들러
+	*/
+	handleVarCreate(varname) {
+		console.assert(varname);
+		this.setState(state => {
+			state.varset.set(varname, 0.0);
+			return { varset: state.varset };
+		});
+	}
+
+	/*
+		상수가 수정될 때 핸들러
+	*/
+	handleVarChange(varname, varvalue) {
+		console.assert(varname);
+		this.setState(state => {
+			state.varset.set(varname, varvalue);
+			return { varset: state.varset };
+		});
+	}
+
+	/*
+		상수가 삭제될 때 핸들러
+	*/
+	handleVarDelete(varname) {
+		console.assert(varname);
+		this.setState(state => {
+			state.varset.delete(varname);
+			return { varset: state.varset };
+		})
 	}
 }
 

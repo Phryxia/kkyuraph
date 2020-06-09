@@ -50,3 +50,16 @@
 .func-desc {
   width: 80%;
 }
+
+.var-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.var-name {
+  width: 20%;
+}
+
+.var-value {
+  width: 70%;
+}
