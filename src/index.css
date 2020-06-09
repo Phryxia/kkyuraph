@@ -1,13 +1,21 @@
+* {
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+
 #mainframe {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-#mainframe div {
+#mainframe > div {
   width: 640px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-#mainframe div div {
+#mainframe > div div {
   padding-top: 10px;
 }
 
@@ -36,6 +44,11 @@
 .hr-label {
   width: 20%;
   text-align: center;
+}
+
+.func-frame {
+  height: 320px;
+  overflow-y: scroll;
 }
 
 .func-row {

@@ -5,7 +5,6 @@ import Parser from './parser';
 import Utility from './utility';
 import './index.css';
 
-import ModuleHeader from './components/module_header';
 import RenderModule from './components/render_module';
 import SyntaxModule from './components/syntax_module';
 import ControlModule from './components/control_module';
@@ -74,36 +73,6 @@ class App extends React.Component {
   	  	ctx.stroke();
   	  }
   	}
-  }
-
-  render() {
-  	return (
-  	  <div>
-  	  	<canvas id='canvas' width='640' height='360'></canvas><br />
-	  	SYNTAX: <textarea id='expression' onChange={(evt) => {
-	  	  this.s = evt.target.value;
-	  	  this.renderSyntax(this.state.vari);
-	  	}}></textarea><br />
-	  	<Variable name='n' parent={this} /><br />
-	  	<span>Result = {this.state.result}</span>
-	  </div>
-	);
-  }
-}
-
-class Variable extends React.Component {
-  constructor(props) {
-  	super(props);
-  }
-
-  render() {
-  	return (
-  	  <span style={{display: 'inline-block'}}>
-  		{this.props.name}: <input type='number' onChange={(evt) => {
-  			this.props.parent.setVariable(this.props.name, evt.target.value);
-  		}} />
-  	  </span>
-  		);
   }
 }
 
