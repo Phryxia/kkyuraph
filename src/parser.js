@@ -219,10 +219,10 @@ class Parser {
 			else {
 				// variable인 경우
 				// Math에 있는 상수인지 체크해보고 없으면 vari를 확인한다.
-				if (Math[vname] !== undefined)
-					return Math[vname];
-				else
-					return this.vari[vname];
+				// if (Math[vname] !== undefined)
+				// 	return Math[vname];
+				// else
+				return this.vari.get(vname).value;
 			}
 		}
 		else if (this.tid === Parser.PAREN_L) {

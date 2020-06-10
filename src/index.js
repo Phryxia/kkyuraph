@@ -84,7 +84,8 @@ class ProtoApp extends React.Component {
 		this.state = {
 			xmin: -4, xmax: 4,
 			ymin: -4, ymax: 4,
-			resolution: 1000,
+			resolution: 200,
+			expression: '',
 			varset: new Map()
 		};
 
@@ -94,6 +95,7 @@ class ProtoApp extends React.Component {
 		});
 		
 		// 이벤트 핸들러
+		this.handleExprChange = this.handleExprChange.bind(this);
 		this.handleControlChange = this.handleControlChange.bind(this);
 		this.handleVarCreate = this.handleVarCreate.bind(this);
 		this.handleVarChange = this.handleVarChange.bind(this);
@@ -115,10 +117,16 @@ class ProtoApp extends React.Component {
 			<div id='mainframe'>
 				<div>
 					{/* RENDER MODULE */}
-					<RenderModule />
+					<RenderModule width={640} height={640} 
+												xmin={this.state.xmin} xmax={this.state.xmax} 
+												ymin={this.state.ymin} ymax={this.state.ymax}
+												resolution={this.state.resolution}
+												expression={this.state.expression}
+												variables={this.state.varset}/>
 
 					{/* SYNTAX MODULE */}
-					<SyntaxModule />
+					<SyntaxModule expression={this.expression}
+												onExprChange={this.handleExprChange}/>
 				</div>
 
 				<div>
@@ -143,17 +151,44 @@ class ProtoApp extends React.Component {
 		);
 	}
 
+	/*
+		식을 수정할 때 호출되는 핸들러 함수이다.
+	*/
+	handleExprChange(value) {
+		this.setState({
+			expression: value
+		});
+	}
+
+	/*
+		범위 설정을 하는 핸들러 함수이다.
+		name은 xmin, xmax, ymin, ymax, resolution이 주어진다.
+		xmin !== xmax, ymin !== ymax가 보장된다.
+	*/
 	handleControlChange(name, value) {
 		console.assert(name);
 		this.setState(state => {
-			if (name === 'xmin')
+			let temp = state[name];
+			if (name === 'xmin') {
 				value = Math.min(state.xmax, value);
-			else if (name === 'xmax')
+				if (value === state.xmax)
+					value = temp;
+			}
+			else if (name === 'xmax') {
 				value = Math.max(state.xmin, value);
-			else if (name === 'ymin')
+				if (value === state.xmin)
+					value = temp;
+			}
+			else if (name === 'ymin') {
 				value = Math.min(state.ymax, value);
-			else if (name === 'ymax')
+				if (value === state.ymax)
+					value = temp;
+			}
+			else if (name === 'ymax') {
 				value = Math.max(state.ymin, value);
+				if (value === state.ymin)
+					value = temp;
+			}
 			return { [name]: value };
 		});
 	}

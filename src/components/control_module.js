@@ -32,7 +32,7 @@ export default class ControlModule extends React.Component {
                    value={this.props.ymax}
                    onChange={this.handleValueChange} /><br />
         Resolution : <input name='resolution' type='range' 
-                            min='100' max='10000' 
+                            min='100' max='1000' 
                             value={this.props.resolution}
                             onChange={this.handleValueChange} />
       </div>
