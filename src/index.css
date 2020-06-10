@@ -15,7 +15,7 @@
   padding-right: 10px;
 }
 
-#mainframe > div div {
+#mainframe > div > div {
   padding-top: 10px;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .func-frame {
-  height: 320px;
+  height: 300px;
   overflow-y: scroll;
 }
 
@@ -62,6 +62,11 @@
 
 .func-desc {
   width: 80%;
+}
+
+.var-frame {
+  height: 300px;
+  overflow-y: scroll;
 }
 
 .var-row {

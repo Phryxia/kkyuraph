@@ -139,7 +139,7 @@ class ProtoApp extends React.Component {
 	handleVarCreate(varname) {
 		console.assert(varname);
 		this.setState(state => {
-			state.varset.set(varname, 0.0);
+			state.varset.set(varname, {value: 0.0, immutable: false});
 			return { varset: state.varset };
 		});
 	}
@@ -150,7 +150,7 @@ class ProtoApp extends React.Component {
 	handleVarChange(varname, varvalue) {
 		console.assert(varname);
 		this.setState(state => {
-			state.varset.set(varname, varvalue);
+			state.varset.set(varname, {value: varvalue, immutable: false});
 			return { varset: state.varset };
 		});
 	}

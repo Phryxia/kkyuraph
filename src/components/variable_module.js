@@ -31,7 +31,10 @@ class VariableRow extends React.Component {
         {/* 삭제 불가능한 상수는 버튼을 렌더링하지 않는다. */}
         {this.props.immutable ? 
           <span style={{width: '10%'}}></span> : 
-          <input type='button' value='삭제' onClick={this.handleButtonClick}/>}
+          <input type='button' 
+                 value='삭제' 
+                 onClick={this.handleButtonClick}
+                 style={{width: '10%'}} />}
       </div>
     );
   }
@@ -74,16 +77,18 @@ export default class VariableModule extends React.Component {
     return (
       <div>
         <ModuleHeader title='VARIABLE' />
-        {this.props.varlist.map(varprof => {
-          return <VariableRow varname={varprof.varname} 
-                              varvalue={varprof.varvalue} 
-                              immutable={varprof.immutable}
-                              onVarChange={this.props.onVarChange} 
-                              onVarDelete={this.props.onVarDelete}
-                              key={varprof.varname} />
-        })}
-        <input type='button' value='추가' 
-               style={{width: '100%'}} onClick={this.handleAddButtonClick} />
+        <div className='var-frame'>
+          {this.props.varlist.map(varprof => {
+            return <VariableRow varname={varprof.varname} 
+                                varvalue={varprof.varvalue} 
+                                immutable={varprof.immutable}
+                                onVarChange={this.props.onVarChange} 
+                                onVarDelete={this.props.onVarDelete}
+                                key={varprof.varname} />
+          })}
+          <input type='button' value='추가' 
+                style={{width: '100%'}} onClick={this.handleAddButtonClick} />
+        </div>
       </div>
     );
   }
@@ -95,11 +100,16 @@ export default class VariableModule extends React.Component {
   handleAddButtonClick(event) {
     let varname = prompt('상수 이름을 입력하세요:', '');
     if (varname) {
+      if (!varname.match(/^[a-zA-Z_][a-zA-Z_0-9]*$/)) {
+        alert('상수 이름은 영문자 또는 _로 시작하고 영문자나 숫자, _로만 이루어져야 합니다.');
+        return;
+      }
+      else if (varname === 'x') {
+        alert('상수 이름은 x가 될 수 없습니다.');
+        return;
+      }
       if (this.props.onVarCreate)
         this.props.onVarCreate(varname);
-    }
-    else {
-      alert('변수 이름은 빈 이름이 될 수 없습니다.');
     }
   }
 }
