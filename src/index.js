@@ -16,8 +16,9 @@ class App extends React.Component {
   	super(props);
 
   	this.state = {
-  		xmin: -1, xmax: 1, xres: 0.01,
-  		ymin: -1, ymax: 1, yres: 0.01,
+  		xmin: -1, xmax: 1,
+			ymin: -1, ymax: 1,
+			resolution: 1000,
   		vari: {}
   	};
 
@@ -81,6 +82,9 @@ class ProtoApp extends React.Component {
 		super(props);
 
 		this.state = {
+			xmin: -4, xmax: 4,
+			ymin: -4, ymax: 4,
+			resolution: 1000,
 			varset: new Map()
 		};
 
@@ -90,6 +94,7 @@ class ProtoApp extends React.Component {
 		});
 		
 		// 이벤트 핸들러
+		this.handleControlChange = this.handleControlChange.bind(this);
 		this.handleVarCreate = this.handleVarCreate.bind(this);
 		this.handleVarChange = this.handleVarChange.bind(this);
 		this.handleVarDelete = this.handleVarDelete.bind(this);
@@ -118,7 +123,12 @@ class ProtoApp extends React.Component {
 
 				<div>
 					{/* CONTROL MODULE */}
-					<ControlModule />
+					<ControlModule xmin={this.state.xmin}
+												 xmax={this.state.xmax}
+												 ymin={this.state.ymin}
+												 ymax={this.state.ymax}
+												 resolution={this.state.resolution}
+												 onValueChange={this.handleControlChange}/>
 
 					{/* VARIABLE MODULE */}
 					<VariableModule varlist={varlist}
@@ -131,6 +141,21 @@ class ProtoApp extends React.Component {
 				</div>
 			</div>
 		);
+	}
+
+	handleControlChange(name, value) {
+		console.assert(name);
+		this.setState(state => {
+			if (name === 'xmin')
+				value = Math.min(state.xmax, value);
+			else if (name === 'xmax')
+				value = Math.max(state.xmin, value);
+			else if (name === 'ymin')
+				value = Math.min(state.ymax, value);
+			else if (name === 'ymax')
+				value = Math.max(state.ymin, value);
+			return { [name]: value };
+		});
 	}
 
 	/*
