@@ -54,6 +54,7 @@ export default class RenderModule extends React.Component {
     ctx.fillStyle = '#FFFFFF';
     ctx.lineWidth = 1;
     ctx.fillRect(0, 0, this.props.width, this.props.height);
+    ctx.font = '16px consolas';
     
     // y축 그리기
     // 몇 가지 케이스가 있다.
@@ -64,32 +65,40 @@ export default class RenderModule extends React.Component {
     // 이 두 경우 그냥 uniform하게 그으면 된다. 
     let xi, xp;
     let dx = (xmax - xmin) / 8;
+    ctx.strokeStyle = '#bbbbbb';
+    ctx.fillStyle = '#bbbbbb';
     if (xmin < 0 && 0 < xmax) {
       for (xi = 0; xi <= xmax; xi += dx) {
         xp = Utility.map(xi, xmin, xmax, 0, w);
         ctx.beginPath();
-        ctx.strokeStyle = '#bbbbbb';
         ctx.moveTo(xp, 0);
         ctx.lineTo(xp, h);
         ctx.stroke();
+        
+        // 숫자
+        ctx.fillText(xi, xp, Utility.map(0, ymin, ymax, h, 0));
       }
       for (xi = 0; xi >= xmin; xi -= dx) {
         xp = Utility.map(xi, xmin, xmax, 0, w);
         ctx.beginPath();
-        ctx.strokeStyle = '#bbbbbb';
         ctx.moveTo(xp, 0);
         ctx.lineTo(xp, h);
         ctx.stroke();
+
+        // 숫자
+        ctx.fillText(xi, xp, Utility.map(0, ymin, ymax, h, 0));
       }
     }
     else {
       for (xi = xmin; xi <= xmax; xi += dx) {
         xp = Utility.map(xi, xmin, xmax, 0, w);
         ctx.beginPath();
-        ctx.strokeStyle = '#bbbbbb';
         ctx.moveTo(xp, 0);
         ctx.lineTo(xp, h);
         ctx.stroke();
+
+        // 숫자
+        ctx.fillText(xi, xp, Utility.map(0, ymin, ymax, h, 0));
       }
     }
 
@@ -101,28 +110,34 @@ export default class RenderModule extends React.Component {
       for (yi = 0; yi <= ymax; yi += dy) {
         yp = Utility.map(yi, ymin, ymax, h, 0);
         ctx.beginPath();
-        ctx.strokeStyle = '#bbbbbb';
         ctx.moveTo(0, yp);
         ctx.lineTo(w, yp);
         ctx.stroke();
+
+        // 숫자
+        ctx.fillText(yi, Utility.map(0, xmin, xmax, 0, w), yp);
       }
       for (yi = 0; yi >= ymin; yi -= dy) {
         yp = Utility.map(yi, ymin, ymax, h, 0);
         ctx.beginPath();
-        ctx.strokeStyle = '#bbbbbb';
         ctx.moveTo(0, yp);
         ctx.lineTo(w, yp);
         ctx.stroke();
+
+        // 숫자
+        ctx.fillText(yi, Utility.map(0, xmin, xmax, 0, w), yp);
       }
     }
     else {
       for (yi = ymin; yi <= ymax; yi += dy) {
         yp = Utility.map(yi, ymin, ymax, h, 0);
         ctx.beginPath();
-        ctx.strokeStyle = '#bbbbbb';
         ctx.moveTo(0, yp);
         ctx.lineTo(w, yp);
         ctx.stroke();
+        
+        // 숫자
+        ctx.fillText(yi, Utility.map(0, xmin, xmax, 0, w), yp);
       }
     }
 
