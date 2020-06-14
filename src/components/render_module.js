@@ -180,14 +180,17 @@ export default class RenderModule extends React.Component {
 
       // NaN이나 undefined 등으로 값이 존재하지 않을 경우 선을 그리지 않는다.
       if (reset) {
-        console.log(x);
         reset = false;
+        ctx.beginPath();
         ctx.moveTo(xp, yp);
       }
       else {
         ctx.lineTo(xp, yp);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(xp, yp);
       }
     }
-    ctx.stroke();
+    //ctx.stroke();
   }
 }
