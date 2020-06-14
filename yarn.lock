@@ -8458,6 +8458,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"lodash.debounce@npm:^4":
+  version: 4.0.8
+  resolution: "lodash.debounce@npm:4.0.8"
+  checksum: c76884e7cf88b87810bf1f5ef69a437e9bdbce2b2df9a0b17f8f1327c1c3dfd1f1ce63f2d16acb70ca97b64be0564a0982664d9f60f11eeb27ef9c852e3eed45
+  languageName: node
+  linkType: hard
+
 "lodash.memoize@npm:^4.1.2":
   version: 4.1.2
   resolution: "lodash.memoize@npm:4.1.2"
@@ -9357,6 +9364,7 @@ fsevents@^1.2.7:
     "@testing-library/react": ^9.3.2
     "@testing-library/user-event": ^7.1.2
     react: ^16.13.1
+    react-debounce-input: ^3.2.2
     react-dom: ^16.13.1
     react-scripts: 3.4.1
   languageName: unknown
@@ -11286,6 +11294,18 @@ fsevents@^1.2.7:
     regenerator-runtime: ^0.13.3
     whatwg-fetch: ^3.0.0
   checksum: 0b61436544e1f9f61c3b2943ad7771efd797901851af200a35323f76f6c43205c8cb9b4d0515a95ceeac7710ba7773e6c6c7fa816f6262cddc6d1ee2c9102744
+  languageName: node
+  linkType: hard
+
+"react-debounce-input@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "react-debounce-input@npm:3.2.2"
+  dependencies:
+    lodash.debounce: ^4
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ^15.3.0 || ^16.0.0
+  checksum: c139fdc7e383c2deacdb81d3b44aef7eeaf4a00fda7d57e6d05c7e31f4a51176c66db59c134c709a2d45626ac26e1898a712a313b13805257b4852343e984fcd
   languageName: node
   linkType: hard
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import ModuleHeader from './module_header';
+import {DebounceInput} from 'react-debounce-input';
 
 /*
   x와 y의 범위 및 해상도를 조정하는 모듈입니다.
@@ -19,18 +20,22 @@ export default class ControlModule extends React.Component {
     return (
       <div>
         <ModuleHeader title='CONTROL' />
-        X : <input name='xmin' type='number' 
+        X : <DebounceInput name='xmin' type='number'
                    value={this.props.xmin} 
-                   onChange={this.handleValueChange} /><span> ~ </span>
-            <input name='xmax' type='number' 
+                   onChange={this.handleValueChange}
+                   debounceTimeout={500} /><span> ~ </span>
+            <DebounceInput name='xmax' type='number' 
                    value={this.props.xmax} 
-                   onChange={this.handleValueChange} /><br />
-        Y : <input name='ymin' type='number' 
+                   onChange={this.handleValueChange}
+                   debounceTimeout={500} /><br />
+        Y : <DebounceInput name='ymin' type='number' 
                    value={this.props.ymin}
-                   onChange={this.handleValueChange} /><span> ~ </span>
-            <input name='ymax' type='number' 
+                   onChange={this.handleValueChange}
+                   debounceTimeout={500} /><span> ~ </span>
+            <DebounceInput name='ymax' type='number' 
                    value={this.props.ymax}
-                   onChange={this.handleValueChange} /><br />
+                   onChange={this.handleValueChange}
+                   debounceTimeout={500} /><br />
         Resolution : <input name='resolution' type='range' 
                             min='100' max='1000' 
                             value={this.props.resolution}

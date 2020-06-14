@@ -27,13 +27,17 @@ export default class RenderModule extends React.Component {
   }
 
   componentDidMount() {
-    this.drawGrid();
-    this.drawGraph();
+    if (this.safetyCheck()) {
+      this.drawGrid();
+      this.drawGraph();
+    }
   }
 
   componentDidUpdate() {
-    this.drawGrid();
-    this.drawGraph();
+    if (this.safetyCheck()) {
+      this.drawGrid();
+      this.drawGraph();
+    }
   }
 
   drawGrid() {
@@ -191,6 +195,14 @@ export default class RenderModule extends React.Component {
         ctx.moveTo(xp, yp);
       }
     }
-    //ctx.stroke();
+  }
+
+  safetyCheck() {
+    return this.props.xmin !== undefined &&
+      this.props.xmax !== undefined &&
+      this.props.ymin !== undefined &&
+      this.props.ymax !== undefined &&
+      this.props.xmin < this.props.xmax &&
+      this.props.ymin < this.props.ymax;
   }
 }

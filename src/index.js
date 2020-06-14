@@ -100,6 +100,9 @@ class ProtoApp extends React.Component {
 		this.handleVarCreate = this.handleVarCreate.bind(this);
 		this.handleVarChange = this.handleVarChange.bind(this);
 		this.handleVarDelete = this.handleVarDelete.bind(this);
+
+		// debounce
+		this.debounce = null;
 	}
 
 	render() {
@@ -167,6 +170,8 @@ class ProtoApp extends React.Component {
 	*/
 	handleControlChange(name, value) {
 		console.assert(name);
+		
+		// 음수값을 입력할 수 있도록 debounce한다.
 		this.setState(state => {
 			let temp = state[name];
 			if (name === 'xmin') {
