@@ -197,6 +197,9 @@ export default class RenderModule extends React.Component {
     }
   }
 
+  /*
+    정상적으로 그래프를 그릴 수 있는 상황인지 검사합니다.
+  */
   safetyCheck() {
     return this.props.xmin !== undefined &&
       this.props.xmax !== undefined &&

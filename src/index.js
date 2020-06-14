@@ -171,7 +171,6 @@ class ProtoApp extends React.Component {
 	handleControlChange(name, value) {
 		console.assert(name);
 		
-		// 음수값을 입력할 수 있도록 debounce한다.
 		this.setState(state => {
 			let temp = state[name];
 			if (name === 'xmin') {
